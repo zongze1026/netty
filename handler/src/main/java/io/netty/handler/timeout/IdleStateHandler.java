@@ -94,6 +94,11 @@ import java.util.concurrent.TimeUnit;
  *
  * @see ReadTimeoutHandler
  * @see WriteTimeoutHandler
+ *
+ *
+ * netty心跳检测原理是通过向eventloop提交一个定时任务，定时去检查channel有多久没有触发channelRead事件
+ * 如果该事件超过了设定的时间的话就会传递userEventTriggered事件
+ *
  */
 public class IdleStateHandler extends ChannelDuplexHandler {
     private static final long MIN_TIMEOUT_NANOS = TimeUnit.MILLISECONDS.toNanos(1);
